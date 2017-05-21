@@ -39,6 +39,22 @@ namespace PING
                 listInfo.Items.Add("无效的主机名或ip地址！");
                 return;
             }
+            EndPoint hostPoint = (new IPEndPoint(host.AddressList[0], 0)) as EndPoint;
+            IPHostEntry ClientInfo;
+            ClientInfo = Dns.GetHostEntry(hostClient);
+            EndPoint clientPoint = (new IPEndPoint(ClientInfo.AddressList[0], 0)) as EndPoint;
+            int dataSize = 4;
+            int packSize = dataSize + 8;
+            //请求响应，类型8
+            const int  icmp_echo=8;
+            Icmp icmp = new Icmp(icmp_echo, 0, 0, 45, 0, dataSize);
+            Byte[] buffer = new Byte[packSize];
+            int index = icmp.CountByte(buffer);
+            if (index != packSize)
+            {
+                listInfo.Items.Add("报文出现错误！");
+            }
         }
     }
 }
+

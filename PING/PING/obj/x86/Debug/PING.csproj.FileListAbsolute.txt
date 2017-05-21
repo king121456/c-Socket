@@ -5,3 +5,10 @@ E:\Socket\PING\PING\obj\x86\Debug\PING.Properties.Resources.resources
 E:\Socket\PING\PING\obj\x86\Debug\PING.csproj.GenerateResource.Cache
 E:\Socket\PING\PING\obj\x86\Debug\PING.exe
 E:\Socket\PING\PING\obj\x86\Debug\PING.pdb
+E:\Socket\c-Socket\PING\PING\obj\x86\Debug\PING.exe
+E:\Socket\c-Socket\PING\PING\obj\x86\Debug\PING.pdb
+E:\Socket\c-Socket\PING\PING\bin\Debug\PING.exe
+E:\Socket\c-Socket\PING\PING\bin\Debug\PING.pdb
+E:\Socket\c-Socket\PING\PING\obj\x86\Debug\PING.Form1.resources
+E:\Socket\c-Socket\PING\PING\obj\x86\Debug\PING.Properties.Resources.resources
+E:\Socket\c-Socket\PING\PING\obj\x86\Debug\PING.csproj.GenerateResource.Cache

@@ -41,7 +41,7 @@ namespace PING
             this.my_sequenceCode = sequence;
             for (int i = 0; i < dataLength; i++)
             {
-                data[i] = (byte)'k';
+                data[i] = (Byte)'k';
             }
         }
 
@@ -66,11 +66,22 @@ namespace PING
             return count;
         }
 
-        //public static UInt16 SumOfCheck(UInt16[] buffer)
-        //{
-        //    int checkSum = 0;
-
-        //}
+        /// <summary>
+        /// ICMP的校验和计算
+        /// </summary>
+        /// <param name="buffer">报文首部</param>
+        /// <returns></returns>
+        public static UInt16 SumOfCheck(UInt16[] buffer)
+        {
+            int checkSum = 0;
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                checkSum += (int)buffer[i];
+            }
+            checkSum = (checkSum >> 16) + (checkSum & 0xffff);
+            checkSum += (checkSum >> 16);
+            return (UInt16)(~checkSum);
+        }
 
 
     }
