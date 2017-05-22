@@ -39,6 +39,7 @@ namespace PING
             this.my_checkSum = checkSum;
             this.my_identifier = identifier;
             this.my_sequenceCode = sequence;
+            data = new Byte[dataLength];
             for (int i = 0; i < dataLength; i++)
             {
                 data[i] = (Byte)'k';
@@ -67,7 +68,7 @@ namespace PING
         }
 
         /// <summary>
-        /// ICMP的校验和计算
+        /// ICMP的校验算法
         /// </summary>
         /// <param name="buffer">报文首部</param>
         /// <returns></returns>
