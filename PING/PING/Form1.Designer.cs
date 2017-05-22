@@ -32,6 +32,7 @@
             this.txtIpAddress = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listInfo = new System.Windows.Forms.ListBox();
+            this.btnLog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnPing
@@ -65,16 +66,26 @@
             this.listInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.listInfo.FormattingEnabled = true;
             this.listInfo.ItemHeight = 12;
-            this.listInfo.Location = new System.Drawing.Point(0, 53);
+            this.listInfo.Location = new System.Drawing.Point(0, 57);
             this.listInfo.Name = "listInfo";
-            this.listInfo.Size = new System.Drawing.Size(480, 220);
+            this.listInfo.Size = new System.Drawing.Size(516, 220);
             this.listInfo.TabIndex = 3;
+            // 
+            // btnLog
+            // 
+            this.btnLog.Location = new System.Drawing.Point(429, 21);
+            this.btnLog.Name = "btnLog";
+            this.btnLog.Size = new System.Drawing.Size(75, 23);
+            this.btnLog.TabIndex = 4;
+            this.btnLog.Text = "记录";
+            this.btnLog.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 273);
+            this.ClientSize = new System.Drawing.Size(516, 277);
+            this.Controls.Add(this.btnLog);
             this.Controls.Add(this.listInfo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtIpAddress);
@@ -95,6 +106,7 @@
         private System.Windows.Forms.TextBox txtIpAddress;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listInfo;
+        private System.Windows.Forms.Button btnLog;
     }
 }
 

@@ -46,6 +46,18 @@ namespace PING
             }
         }
 
+        public UInt16 My_CheckSum
+        {
+            get
+            {
+                return my_checkSum;
+            }
+            set
+            {
+                value = my_checkSum;
+            }
+        }
+
         public int CountByte(Byte[] buffer)
         {
             Byte[] b_type = new Byte[1] { my_type };
@@ -64,6 +76,8 @@ namespace PING
             count += b_identifier.Length;
             Array.Copy(b_sequenceNumnber, 0, buffer, count, b_sequenceNumnber.Length);
             count += b_sequenceNumnber.Length;
+            Array.Copy(data, 0, buffer, count, data.Length);
+            count += data.Length;
             return count;
         }
 

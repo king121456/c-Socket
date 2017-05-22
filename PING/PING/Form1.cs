@@ -34,7 +34,7 @@ namespace PING
             {
                 host = Dns.GetHostEntry(txtIpAddress.Text);
             }
-            catch
+            catch(Exception ex)
             {
                 listInfo.Items.Add("无效的主机名或ip地址！");
                 return;
@@ -53,7 +53,69 @@ namespace PING
             if (index != packSize)
             {
                 listInfo.Items.Add("报文出现错误！");
+                return;
             }
+            int ckSum_buffer_length=(int)Math.Ceiling(((double)index)/2);
+            UInt16[] ckSum_buffer = new UInt16[ckSum_buffer_length];
+            int icmp_header_buffer_index = 0;
+            for (int i = 0; i < ckSum_buffer_length; i++)
+            {
+                ckSum_buffer[i] = BitConverter.ToUInt16(buffer, icmp_header_buffer_index);
+                icmp_header_buffer_index += 2;
+            }
+            icmp.My_CheckSum = Icmp.SumOfCheck(ckSum_buffer);
+            //icmp数据包的内容
+            Byte[] sendData = new Byte[packSize];
+            index = icmp.CountByte(sendData);
+            if (index != packSize)
+            {
+                listInfo.Items.Add("报文出现错误！");
+                return;
+            }
+            int pingNUm = 4;
+            for (int i = 0; i < 4; i++)
+            {
+                int Nbytes = 0;
+                int startTime = Environment.TickCount;
+                try
+                {
+                    Nbytes = socket.SendTo(sendData, packSize, SocketFlags.None, hostPoint);
+                }
+                catch (Exception ex)
+                {
+                    listInfo.Items.Add("发送报文失败！");
+                    return;
+                }
+                Byte[] receiveData = new Byte[256];
+                Nbytes = 0;
+                int timecountsume = 0;
+                while (true)
+                {
+                    try
+                    {
+                        Nbytes = socket.ReceiveFrom(receiveData, 256, SocketFlags.None, ref hostPoint);
+                    }
+                    catch (Exception ex)
+                    {
+                        listInfo.Items.Add("超时无响应！");
+                        return;
+                    }
+                    if (Nbytes > 0)
+                    {
+                        timecountsume = Environment.TickCount - startTime;
+                        if (timecountsume < 1)
+                        {
+                            listInfo.Items.Add(string.Format("来自 {0} 的回复: 字节={1} 时间<1ms", host.AddressList[0].ToString(), Nbytes));
+                        }
+                        else
+                        {
+                            listInfo.Items.Add(string.Format("来自 {0} 的回复: 字节={1} 时间={2}ms", host.AddressList[0].ToString(), Nbytes,timecountsume));
+                        }
+                        break;
+                    }
+                }
+            }
+            socket.Close();
         }
     }
 }
